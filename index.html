@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>SHIVANSH IT SERVICES - AMC Management System</title>
     <style>
         * {
@@ -13,7 +14,6 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: #f0f2f5;
             padding: 20px;
-            transition: all 0.3s;
         }
         .container {
             max-width: 1400px;
@@ -25,13 +25,10 @@
             padding: 20px;
             border-radius: 12px;
             margin-bottom: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            transition: all 0.3s;
             display: flex;
             align-items: center;
             justify-content: space-between;
             flex-wrap: wrap;
-            gap: 15px;
         }
         .header-left {
             display: flex;
@@ -46,23 +43,9 @@
             border-radius: 12px;
             padding: 5px;
         }
-        .header-text {
-            text-align: left;
-        }
         .header-text .company-logo-text {
             font-size: 28px;
             font-weight: bold;
-            letter-spacing: 2px;
-        }
-        .header-text .company-logo-sub {
-            font-size: 14px;
-            letter-spacing: 2px;
-        }
-        .header-right {
-            text-align: right;
-        }
-        .contact-info {
-            font-size: 14px;
         }
         .dashboard {
             display: grid;
@@ -75,27 +58,20 @@
             padding: 20px;
             border-radius: 12px;
             text-align: center;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            transition: transform 0.2s, cursor 0.2s;
             cursor: pointer;
+            transition: transform 0.2s;
         }
         .dashboard-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
-        }
-        .dashboard-card h3 {
-            color: #666;
-            font-size: 14px;
-            margin-bottom: 10px;
         }
         .dashboard-card .number {
             font-size: 36px;
             font-weight: bold;
             color: #1a237e;
         }
-        .dashboard-card.pending .number { color: #f39c12; }
-        .dashboard-card.completed .number { color: #2ecc71; }
-        .dashboard-card.today .number { color: #3498db; }
+        .pending .number { color: #f39c12; }
+        .completed .number { color: #2ecc71; }
+        .today .number { color: #3498db; }
         .login-container {
             max-width: 400px;
             margin: 100px auto;
@@ -104,41 +80,17 @@
             border-radius: 12px;
             box-shadow: 0 0 20px rgba(0,0,0,0.2);
         }
-        .login-logo {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .login-logo-img {
-            max-width: 100px;
-            max-height: 100px;
-            object-fit: contain;
-        }
-        .login-container h2 {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #1a237e;
-        }
-        .login-container input {
+        .login-container input, .login-container button {
             width: 100%;
             padding: 12px;
             margin: 10px 0;
-            border: 1px solid #ccc;
             border-radius: 6px;
         }
         .login-container button {
-            width: 100%;
-            padding: 12px;
             background: #1a237e;
             color: white;
             border: none;
-            border-radius: 6px;
             cursor: pointer;
-            font-size: 16px;
-        }
-        .error {
-            color: red;
-            text-align: center;
-            margin-top: 10px;
         }
         .main-app {
             display: none;
@@ -151,9 +103,7 @@
             padding: 15px 20px;
             border-radius: 12px;
             margin-bottom: 20px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
             flex-wrap: wrap;
-            gap: 10px;
         }
         .logout-btn, .admin-btn {
             padding: 8px 16px;
@@ -162,57 +112,56 @@
             color: white;
             cursor: pointer;
         }
-        .logout-btn {
-            background: #e74c3c;
-        }
-        .admin-btn {
-            background: #f39c12;
-        }
+        .logout-btn { background: #e74c3c; }
+        .admin-btn { background: #f39c12; }
         .main-layout {
             display: flex;
             gap: 20px;
             flex-wrap: wrap;
         }
-        .form-section {
+        .form-section, .list-section {
             flex: 1;
             min-width: 350px;
             background: white;
             padding: 20px;
             border-radius: 12px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
-        .list-section {
-            flex: 2;
-            min-width: 500px;
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        input, select, button, textarea {
+        input, select, button {
             width: 100%;
             padding: 10px;
             margin: 8px 0;
             border: 1px solid #ccc;
             border-radius: 6px;
-            font-size: 14px;
         }
         button {
             background: #1a237e;
             color: white;
-            border: none;
             cursor: pointer;
-            font-weight: bold;
         }
-        button:hover {
-            opacity: 0.9;
+        .gps-btn { background: #27ae60; }
+        .photo-section {
+            border: 2px dashed #1a237e;
+            padding: 15px;
+            border-radius: 12px;
+            margin: 10px 0;
         }
-        .delete-btn {
-            background: #e74c3c;
+        .photo-preview {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .photo-preview img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 2px solid #1a237e;
+        }
+        .photo-counter {
+            font-size: 12px;
+            color: #e74c3c;
             margin-top: 5px;
-        }
-        .gps-btn {
-            background: #27ae60;
         }
         .job-card {
             border: 1px solid #ddd;
@@ -221,38 +170,17 @@
             margin-bottom: 12px;
             background: #fafafa;
             cursor: pointer;
-            transition: transform 0.2s;
-        }
-        .job-card:hover {
-            transform: scale(1.01);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
         .status {
             font-weight: bold;
             padding: 4px 8px;
             border-radius: 20px;
             display: inline-block;
-            margin-top: 5px;
         }
         .status-received { background: #3498db; color: white; }
         .status-diagnosis { background: #f39c12; color: white; }
         .status-repairing { background: #9b59b6; color: white; }
         .status-repaired { background: #2ecc71; color: white; }
-        .role-badge {
-            background: #1a237e;
-            color: white;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-        }
-        .whatsapp-btn {
-            background: #25D366;
-            margin-top: 5px;
-        }
-        .email-btn {
-            background: #3498db;
-            margin-top: 5px;
-        }
         .modal {
             display: none;
             position: fixed;
@@ -278,7 +206,6 @@
             top: 15px;
             font-size: 24px;
             cursor: pointer;
-            color: #999;
         }
         .profile-header {
             background: #1a237e;
@@ -300,66 +227,65 @@
             background: #e8eaf6;
             border-radius: 8px;
         }
-        .engineer-card {
-            border: 1px solid #ddd;
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 8px;
-            background: #f9f9f9;
-        }
-        .logo-preview {
-            max-width: 100px;
-            max-height: 100px;
+        .photo-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
             margin-top: 10px;
-            border: 1px solid #ddd;
-            padding: 5px;
         }
-        .jobs-list-modal .modal-content {
-            max-width: 700px;
-        }
-        .jobs-list-modal .job-item {
-            border-bottom: 1px solid #eee;
-            padding: 10px;
+        .photo-gallery img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
             cursor: pointer;
-        }
-        .jobs-list-modal .job-item:hover {
-            background: #f5f5f5;
         }
     </style>
 </head>
 <body>
 
-<!-- Login Container -->
 <div id="loginContainer" class="login-container">
-    <div id="loginLogoArea" class="login-logo"></div>
+    <div style="text-align:center; margin-bottom:20px;">
+        <div style="font-size:28px; font-weight:bold; color:#1a237e;">SHIVANSH</div>
+        <div style="color:#0d47a1;">IT SERVICES</div>
+        <small>RANE NAGAR, NASHIK</small>
+    </div>
     <h2>🔐 AMC Management System Login</h2>
     <input type="text" id="loginUsername" placeholder="Username">
     <input type="password" id="loginPassword" placeholder="Password">
     <button onclick="login()">Login</button>
-    <div id="loginError" class="error"></div>
-    <div style="margin-top: 15px; font-size: 12px; text-align: center;">
-        <strong>Demo Credentials:</strong><br>
-        👑 Admin: admin / admin123<br>
-        👨‍🔧 Engineer 1: eng1 / eng123<br>
-        👨‍🔧 Engineer 2: eng2 / eng123
+    <div id="loginError" style="color:red; text-align:center; margin-top:10px;"></div>
+    <div style="margin-top:15px; font-size:12px; text-align:center;">
+        <strong>Demo:</strong> admin/admin123 | eng1/eng123 | eng2/eng123
     </div>
 </div>
 
-<!-- Main Application -->
 <div id="mainApp" class="main-app">
     <div class="container">
-        <div id="companyHeader" class="company-header"></div>
+        <div id="companyHeader" class="company-header">
+            <div class="header-left">
+                <div style="width:70px; height:70px; background:#fff; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:30px;">🖥️</div>
+                <div class="header-text">
+                    <div class="company-logo-text">SHIVANSH</div>
+                    <div>IT SERVICES</div>
+                    <div style="font-size:12px;">Your Trusted IT Partner</div>
+                </div>
+            </div>
+            <div class="header-right">
+                📍 RANE NAGAR, NASHIK<br>
+                📞 7775057299
+            </div>
+        </div>
 
         <div class="top-bar">
             <h1>🛠️ AMC Management System</h1>
             <div>
-                <span id="userRoleDisplay" class="role-badge"></span>
+                <span id="userRoleDisplay" style="background:#1a237e; color:white; padding:4px 12px; border-radius:20px;"></span>
                 <button id="adminPanelBtn" class="admin-btn" style="display:none;" onclick="openAdminPanel()">⚙️ Admin Panel</button>
                 <button class="logout-btn" onclick="logout()">Logout</button>
             </div>
         </div>
 
-        <!-- Dashboard - Clickable Cards -->
         <div class="dashboard">
             <div class="dashboard-card" onclick="showJobsList('total')">
                 <h3>📊 Total Jobs</h3>
@@ -386,22 +312,34 @@
                     <input type="text" id="custName" placeholder="Customer Name *" required>
                     <input type="text" id="custMobile" placeholder="Mobile Number *" required>
                     <input type="email" id="custEmail" placeholder="Email ID *" required>
-                    <input type="text" id="company" placeholder="Company Name (Optional)">
+                    <input type="text" id="company" placeholder="Company Name">
                     <select id="productType" required>
-                        <option value="">Select Product *</option>
+                        <option value="">Select Product</option>
                         <option>Laptop</option>
                         <option>Desktop</option>
                         <option>CCTV</option>
                         <option>Printer</option>
                     </select>
                     
-                    <div style="border: 2px solid #27ae60; padding: 10px; border-radius: 8px; margin: 10px 0;">
-                        <label><strong>📍 Pickup Location (GPS Compulsory)</strong></label>
-                        <button type="button" id="getGpsBtn" class="gps-btn">📍 Get Current GPS Location</button>
-                        <input type="text" id="pickupLocation" placeholder="Pickup location will appear here" readonly required>
+                    <div style="border:2px solid #27ae60; padding:10px; border-radius:8px;">
+                        <label>📍 Pickup Location (GPS)</label>
+                        <button type="button" id="getGpsBtn" class="gps-btn">📍 Get GPS Location</button>
+                        <input type="text" id="pickupLocation" placeholder="Pickup location" readonly required>
                         <input type="hidden" id="pickupLat">
                         <input type="hidden" id="pickupLng">
-                        <small id="gpsError" style="color: red;"></small>
+                        <small id="gpsError" style="color:red;"></small>
+                    </div>
+
+                    <!-- Photo Upload Section - Compulsory -->
+                    <div class="photo-section">
+                        <label><strong>📸 Product Photos (Compulsory)</strong></label>
+                        <div style="color:#e74c3c; font-size:12px; margin-bottom:5px;">
+                            ⚠️ Minimum 2 photos, Maximum 6 photos
+                        </div>
+                        <input type="file" id="photoInput" accept="image/*" capture="environment" multiple>
+                        <button type="button" onclick="addPhotos()" style="background:#3498db;">➕ Add Selected Photos</button>
+                        <div id="photoPreview" class="photo-preview"></div>
+                        <div id="photoCounter" class="photo-counter">Photos: 0 (Need minimum 2)</div>
                     </div>
 
                     <button type="submit">✅ Create Job & Generate ID</button>
@@ -410,18 +348,16 @@
 
             <div class="list-section">
                 <h3>🔍 Search Job by ID</h3>
-                <input type="text" id="searchId" placeholder="Enter Job ID (AMC001)">
+                <input type="text" id="searchId" placeholder="Job ID (AMC001)">
                 <button id="searchBtn">Search</button>
-                <div id="searchResult" style="margin-top: 15px;"></div>
-
-                <h3 style="margin-top: 20px;">📌 All Jobs (Click on any job to view profile)</h3>
+                <div id="searchResult"></div>
+                <h3>📌 All Jobs</h3>
                 <div id="jobList"></div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Profile Modal -->
 <div id="profileModal" class="modal">
     <div class="modal-content">
         <span class="close-modal" onclick="closeProfile()">&times;</span>
@@ -429,356 +365,159 @@
     </div>
 </div>
 
-<!-- Jobs List Modal (for Dashboard clicks) -->
-<div id="jobsListModal" class="modal jobs-list-modal">
+<div id="jobsListModal" class="modal">
     <div class="modal-content">
         <span class="close-modal" onclick="closeJobsListModal()">&times;</span>
         <div id="jobsListContent"></div>
     </div>
 </div>
 
-<!-- Admin Panel Modal -->
 <div id="adminModal" class="modal">
-    <div class="modal-content" style="max-width: 700px;">
+    <div class="modal-content">
         <span class="close-modal" onclick="closeAdminModal()">&times;</span>
-        <h2 style="color:#1a237e;">⚙️ Admin Panel</h2>
-        
-        <h3>🔐 Change Admin Password</h3>
-        <input type="password" id="oldPassword" placeholder="Current Password">
-        <input type="password" id="newPassword" placeholder="New Password">
-        <input type="password" id="confirmPassword" placeholder="Confirm New Password">
-        <button onclick="changeAdminPassword()">Change Password</button>
-        
-        <hr style="margin: 20px 0;">
-        
-        <h3>🏢 Company Settings</h3>
-        <input type="text" id="compName" placeholder="Company Name">
-        <input type="text" id="compAddress" placeholder="Company Address">
-        <input type="text" id="compMobile" placeholder="Company Mobile">
-        <input type="text" id="compLogoText" placeholder="Logo Text (e.g., SHIVANSH)">
-        <input type="text" id="compTagline" placeholder="Tagline (e.g., IT SERVICES)">
-        
-        <label>📷 Company Logo Image (Left Side):</label>
-        <input type="file" id="logoUpload" accept="image/*" onchange="previewLogo(event)">
-        <div id="logoPreviewArea"></div>
-        <button onclick="saveLogo()">💾 Save Logo</button>
-        <button onclick="removeLogo()" style="background:#e74c3c;">🗑️ Remove Logo</button>
-        
-        <hr style="margin: 15px 0;">
-        
-        <label>🎨 Primary Color:</label>
-        <input type="color" id="primaryColor" value="#1a237e">
-        <label>🎨 Secondary Color:</label>
-        <input type="color" id="secondaryColor" value="#0d47a1">
-        <label>📐 Header Style:</label>
-        <select id="headerStyle">
-            <option value="gradient">Gradient</option>
-            <option value="solid">Solid</option>
-            <option value="dark">Dark</option>
-        </select>
-        <button onclick="saveCompanySettings()">💾 Save All Settings</button>
-        
-        <hr style="margin: 20px 0;">
-        
-        <h3>👨‍🔧 Engineers Management</h3>
-        <div id="engineersList"></div>
-        <div style="border: 1px solid #ddd; padding: 15px; border-radius: 8px; margin-top: 15px;">
-            <h4>Add New Engineer</h4>
-            <input type="text" id="newEngName" placeholder="Engineer Name">
-            <input type="text" id="newEngMobile" placeholder="Engineer Mobile">
-            <input type="text" id="newEngUsername" placeholder="Username">
-            <input type="text" id="newEngPassword" placeholder="Password">
-            <button onclick="addEngineer()">➕ Add Engineer</button>
-        </div>
-        
-        <button style="background:#e74c3c; margin-top:20px;" onclick="closeAdminModal()">Close</button>
+        <div id="adminContent"></div>
     </div>
 </div>
 
 <script>
     let adminPassword = localStorage.getItem('adminPassword') || "admin123";
-    
-    let companySettings = JSON.parse(localStorage.getItem('companySettings')) || {
-        name: "SHIVANSH IT SERVICES",
-        address: "RANE NAGAR, NASHIK",
-        mobile: "7775057299",
-        logoText: "SHIVANSH",
-        tagline: "IT SERVICES",
-        primaryColor: "#1a237e",
-        secondaryColor: "#0d47a1",
-        headerStyle: "gradient",
-        logoImage: null
-    };
-    
     let engineers = JSON.parse(localStorage.getItem('engineers')) || [
         { name: "Engineer 1", mobile: "9876543210", username: "eng1", password: "eng123" },
         { name: "Engineer 2", mobile: "9876543211", username: "eng2", password: "eng123" }
     ];
     
-    let users = {
-        admin: { password: adminPassword, role: "admin", displayName: "Admin" }
-    };
+    let users = { admin: { password: adminPassword, role: "admin", displayName: "Admin" } };
     
-    function loadEngineersToUsers() {
-        users = {
-            admin: { password: adminPassword, role: "admin", displayName: "Admin" }
-        };
-        engineers.forEach(eng => {
-            users[eng.username] = { 
-                password: eng.password, 
-                role: "engineer", 
-                displayName: eng.name
-            };
-        });
-        localStorage.setItem('engineers', JSON.stringify(engineers));
+    function loadEngineers() {
+        users = { admin: { password: adminPassword, role: "admin", displayName: "Admin" } };
+        engineers.forEach(eng => { users[eng.username] = { password: eng.password, role: "engineer", displayName: eng.name }; });
     }
-    loadEngineersToUsers();
+    loadEngineers();
     
     let currentUser = null;
     let jobs = JSON.parse(localStorage.getItem('amcJobs')) || [];
-
-    function saveJobs() {
-        localStorage.setItem('amcJobs', JSON.stringify(jobs));
-        updateDashboard();
-    }
-
-    function generateId() {
-        let lastId = jobs.length + 1;
-        return "AMC" + String(lastId).padStart(3, '0');
-    }
+    let tempPhotos = []; // Temporary photos for new job
+    
+    function saveJobs() { localStorage.setItem('amcJobs', JSON.stringify(jobs)); updateDashboard(); }
+    function generateId() { return "AMC" + String(jobs.length + 1).padStart(3, '0'); }
     
     function updateDashboard() {
-        let total = jobs.length;
-        let pending = jobs.filter(job => job.status !== "repaired").length;
-        let completed = jobs.filter(job => job.status === "repaired").length;
-        
         let today = new Date().toLocaleDateString();
-        let todayJobs = jobs.filter(job => {
-            let jobDate = new Date(job.timestamp).toLocaleDateString();
-            return jobDate === today;
-        }).length;
-        
-        document.getElementById('totalJobs').innerText = total;
-        document.getElementById('pendingJobs').innerText = pending;
-        document.getElementById('completedJobs').innerText = completed;
-        document.getElementById('todayJobs').innerText = todayJobs;
+        document.getElementById('totalJobs').innerText = jobs.length;
+        document.getElementById('pendingJobs').innerText = jobs.filter(j => j.status !== "repaired").length;
+        document.getElementById('completedJobs').innerText = jobs.filter(j => j.status === "repaired").length;
+        document.getElementById('todayJobs').innerText = jobs.filter(j => new Date(j.timestamp).toLocaleDateString() === today).length;
     }
     
-    // Show Jobs List based on category
-    function showJobsList(category) {
-        let filteredJobs = [];
-        let title = "";
+    // Photo Functions
+    function addPhotos() {
+        let input = document.getElementById('photoInput');
+        let files = input.files;
         
-        switch(category) {
-            case 'total':
-                filteredJobs = jobs;
-                title = "📊 All Jobs (" + jobs.length + ")";
-                break;
-            case 'pending':
-                filteredJobs = jobs.filter(job => job.status !== "repaired");
-                title = "⏳ Pending Jobs (" + filteredJobs.length + ")";
-                break;
-            case 'completed':
-                filteredJobs = jobs.filter(job => job.status === "repaired");
-                title = "✅ Completed Jobs (" + filteredJobs.length + ")";
-                break;
-            case 'today':
-                let today = new Date().toLocaleDateString();
-                filteredJobs = jobs.filter(job => {
-                    let jobDate = new Date(job.timestamp).toLocaleDateString();
-                    return jobDate === today;
-                });
-                title = "📅 Today's Jobs (" + filteredJobs.length + ")";
-                break;
+        if (tempPhotos.length + files.length > 6) {
+            alert("❌ Maximum 6 photos allowed! Currently have " + tempPhotos.length + " photos.");
+            return;
         }
         
-        if (filteredJobs.length === 0) {
-            document.getElementById('jobsListContent').innerHTML = `
-                <div class="profile-header">
-                    <h2>${title}</h2>
-                </div>
-                <div style="text-align:center; padding:40px;">
-                    <p>❌ No jobs found in this category.</p>
-                </div>
-            `;
+        for (let i = 0; i < files.length; i++) {
+            let reader = new FileReader();
+            reader.onload = function(e) {
+                tempPhotos.push(e.target.result);
+                updatePhotoPreview();
+            };
+            reader.readAsDataURL(files[i]);
+        }
+        input.value = "";
+    }
+    
+    function updatePhotoPreview() {
+        let previewDiv = document.getElementById('photoPreview');
+        let counterDiv = document.getElementById('photoCounter');
+        
+        let html = "";
+        tempPhotos.forEach((photo, index) => {
+            html += `<div style="position:relative;">
+                        <img src="${photo}" style="width:80px; height:80px; object-fit:cover; border-radius:8px;">
+                        <button type="button" onclick="removePhoto(${index})" style="position:absolute; top:-8px; right:-8px; width:25px; height:25px; background:#e74c3c; border-radius:50%; padding:0;">×</button>
+                    </div>`;
+        });
+        previewDiv.innerHTML = html;
+        
+        let count = tempPhotos.length;
+        counterDiv.innerHTML = `📸 Photos: ${count} (Need minimum 2)`;
+        if (count < 2) {
+            counterDiv.style.color = "#e74c3c";
         } else {
-            let jobsHtml = `<div class="profile-header"><h2>${title}</h2></div>`;
-            filteredJobs.forEach(job => {
-                let statusClass = `status-${job.status}`;
-                jobsHtml += `
-                    <div class="job-item" onclick="showProfileAndCloseList(${JSON.stringify(job).replace(/"/g, '&quot;')})">
-                        <strong>ID:</strong> ${job.id} | <strong>${job.customerName}</strong><br>
-                        <strong>Product:</strong> ${job.productType}<br>
-                        <strong>Status:</strong> <span class="status ${statusClass}">${job.statusText}</span>
-                        ${job.cost > 0 ? `<br><strong>💰 ₹ ${job.cost}</strong>` : ""}
-                        <hr style="margin-top:8px;">
-                    </div>
-                `;
-            });
-            document.getElementById('jobsListContent').innerHTML = jobsHtml;
+            counterDiv.style.color = "#27ae60";
+        }
+    }
+    
+    function removePhoto(index) {
+        tempPhotos.splice(index, 1);
+        updatePhotoPreview();
+    }
+    
+    function showJobsList(category) {
+        let filtered = [];
+        let title = "";
+        if (category === 'total') { filtered = jobs; title = "All Jobs"; }
+        else if (category === 'pending') { filtered = jobs.filter(j => j.status !== "repaired"); title = "Pending Jobs"; }
+        else if (category === 'completed') { filtered = jobs.filter(j => j.status === "repaired"); title = "Completed Jobs"; }
+        else if (category === 'today') { 
+            let today = new Date().toLocaleDateString();
+            filtered = jobs.filter(j => new Date(j.timestamp).toLocaleDateString() === today);
+            title = "Today's Jobs";
         }
         
+        let html = `<div class="profile-header"><h2>📊 ${title} (${filtered.length})</h2></div>`;
+        filtered.forEach(job => {
+            html += `<div class="job-item" style="border-bottom:1px solid #eee; padding:10px; cursor:pointer;" onclick="showProfileAndCloseList(${JSON.stringify(job).replace(/"/g, '&quot;')})">
+                        <strong>${job.id}</strong> | ${job.customerName}<br>
+                        <span class="status status-${job.status}">${job.statusText}</span>
+                    </div>`;
+        });
+        document.getElementById('jobsListContent').innerHTML = html;
         document.getElementById('jobsListModal').style.display = "block";
     }
     
-    function showProfileAndCloseList(job) {
-        closeJobsListModal();
-        showProfile(job);
-    }
+    function showProfileAndCloseList(job) { closeJobsListModal(); showProfile(job); }
+    function closeJobsListModal() { document.getElementById('jobsListModal').style.display = "none"; }
     
-    function closeJobsListModal() {
-        document.getElementById('jobsListModal').style.display = "none";
-    }
-    
-    function changeAdminPassword() {
-        let oldPwd = document.getElementById('oldPassword').value;
-        let newPwd = document.getElementById('newPassword').value;
-        let confirmPwd = document.getElementById('confirmPassword').value;
-        
-        if (oldPwd !== adminPassword) {
-            alert("❌ Current password is incorrect!");
-            return;
-        }
-        if (newPwd !== confirmPwd) {
-            alert("❌ New password and confirm password do not match!");
-            return;
-        }
-        if (newPwd.length < 4) {
-            alert("❌ Password must be at least 4 characters!");
-            return;
-        }
-        
-        adminPassword = newPwd;
-        localStorage.setItem('adminPassword', adminPassword);
-        users.admin.password = adminPassword;
-        
-        document.getElementById('oldPassword').value = "";
-        document.getElementById('newPassword').value = "";
-        document.getElementById('confirmPassword').value = "";
-        
-        alert("✅ Admin password changed successfully!");
-    }
-
-    function previewLogo(event) {
-        let reader = new FileReader();
-        reader.onload = function(e) {
-            let previewDiv = document.getElementById('logoPreviewArea');
-            previewDiv.innerHTML = `<img src="${e.target.result}" class="logo-preview" style="max-width:100px;"><br><small>Preview</small>`;
-        };
-        reader.readAsDataURL(event.target.files[0]);
-    }
-    
-    function saveLogo() {
-        let fileInput = document.getElementById('logoUpload');
-        if (fileInput.files && fileInput.files[0]) {
-            let reader = new FileReader();
-            reader.onload = function(e) {
-                companySettings.logoImage = e.target.result;
-                localStorage.setItem('companySettings', JSON.stringify(companySettings));
-                applyCompanySettings();
-                alert("✅ Logo saved successfully!");
-            };
-            reader.readAsDataURL(fileInput.files[0]);
-        } else {
-            alert("Please select an image file first!");
-        }
-    }
-    
-    function removeLogo() {
-        companySettings.logoImage = null;
-        localStorage.setItem('companySettings', JSON.stringify(companySettings));
-        applyCompanySettings();
-        document.getElementById('logoPreviewArea').innerHTML = "";
-        alert("✅ Logo removed!");
-    }
-    
-    function applyCompanySettings() {
-        let header = document.getElementById('companyHeader');
-        let primary = companySettings.primaryColor;
-        let secondary = companySettings.secondaryColor;
-        
-        if (companySettings.headerStyle === "gradient") {
-            header.style.background = `linear-gradient(135deg, ${primary}, ${secondary})`;
-        } else if (companySettings.headerStyle === "solid") {
-            header.style.background = primary;
-        } else if (companySettings.headerStyle === "dark") {
-            header.style.background = "#2c3e50";
-        }
-        
-        let logoHtml = "";
-        if (companySettings.logoImage) {
-            logoHtml = `<img src="${companySettings.logoImage}" class="header-logo" alt="Logo">`;
-        } else {
-            logoHtml = `<div style="width:70px; height:70px; background:rgba(255,255,255,0.2); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:30px;">🖥️</div>`;
-        }
-        
-        header.innerHTML = `
-            <div class="header-left">
-                ${logoHtml}
-                <div class="header-text">
-                    <div class="company-logo-text">${companySettings.logoText}</div>
-                    <div class="company-logo-sub">${companySettings.tagline}</div>
-                    <div class="tagline" style="font-size:12px;">Your Trusted IT Partner</div>
-                </div>
-            </div>
-            <div class="header-right">
-                <div class="contact-info">
-                    📍 ${companySettings.address}<br>
-                    📞 ${companySettings.mobile}
-                </div>
-            </div>
+    function openAdminPanel() {
+        let html = `
+            <h2>⚙️ Admin Panel</h2>
+            <h3>🔐 Change Admin Password</h3>
+            <input type="password" id="oldPassword" placeholder="Current Password">
+            <input type="password" id="newPassword" placeholder="New Password">
+            <input type="password" id="confirmPassword" placeholder="Confirm Password">
+            <button onclick="changeAdminPassword()">Change Password</button>
+            <hr>
+            <h3>👨‍🔧 Engineers</h3>
+            <div id="engineersList"></div>
+            <h4>Add Engineer</h4>
+            <input type="text" id="newEngName" placeholder="Name">
+            <input type="text" id="newEngMobile" placeholder="Mobile">
+            <input type="text" id="newEngUsername" placeholder="Username">
+            <input type="text" id="newEngPassword" placeholder="Password">
+            <button onclick="addEngineer()">Add</button>
+            <button onclick="closeAdminModal()" style="background:#e74c3c; margin-top:20px;">Close</button>
         `;
-        
-        let loginLogoHtml = "";
-        if (companySettings.logoImage) {
-            loginLogoHtml = `<img src="${companySettings.logoImage}" class="login-logo-img" style="max-width:80px;"><br>`;
-        }
-        loginLogoHtml += `<div class="company-logo-text" style="color:${primary}; font-size:22px;">${companySettings.logoText}</div>
-                         <div style="color:${secondary};">${companySettings.tagline}</div>
-                         <small>${companySettings.address}</small>`;
-        document.getElementById('loginLogoArea').innerHTML = loginLogoHtml;
-        
-        document.querySelectorAll('button').forEach(btn => {
-            if (!btn.classList.contains('delete-btn') && !btn.classList.contains('gps-btn') && !btn.classList.contains('whatsapp-btn') && !btn.classList.contains('email-btn') && !btn.classList.contains('logout-btn') && !btn.classList.contains('admin-btn')) {
-                btn.style.backgroundColor = primary;
-            }
-        });
-    }
-    
-    function saveCompanySettings() {
-        companySettings.name = document.getElementById('compName').value || companySettings.name;
-        companySettings.address = document.getElementById('compAddress').value || companySettings.address;
-        companySettings.mobile = document.getElementById('compMobile').value || companySettings.mobile;
-        companySettings.logoText = document.getElementById('compLogoText').value || companySettings.logoText;
-        companySettings.tagline = document.getElementById('compTagline').value || companySettings.tagline;
-        companySettings.primaryColor = document.getElementById('primaryColor').value;
-        companySettings.secondaryColor = document.getElementById('secondaryColor').value;
-        companySettings.headerStyle = document.getElementById('headerStyle').value;
-        
-        localStorage.setItem('companySettings', JSON.stringify(companySettings));
-        applyCompanySettings();
-        alert("✅ Company settings saved!");
-        closeAdminModal();
+        document.getElementById('adminContent').innerHTML = html;
+        renderEngineersList();
+        document.getElementById('adminModal').style.display = "block";
     }
     
     function renderEngineersList() {
         let container = document.getElementById('engineersList');
-        if (engineers.length === 0) {
-            container.innerHTML = "<p>No engineers added.</p>";
-            return;
-        }
+        if (!container) return;
         let html = "";
-        engineers.forEach((eng, index) => {
-            html += `
-                <div class="engineer-card">
-                    <strong>${eng.name}</strong><br>
-                    📞 ${eng.mobile}<br>
-                    👤 Username: ${eng.username}<br>
-                    🔑 Password: ${eng.password}<br>
-                    <button style="background:#f39c12; margin-top:5px;" onclick="editEngineer(${index})">✏️ Edit</button>
-                    <button style="background:#e74c3c; margin-top:5px;" onclick="deleteEngineer(${index})">🗑️ Delete</button>
-                </div>
-            `;
+        engineers.forEach((eng, i) => {
+            html += `<div style="border:1px solid #ddd; padding:10px; margin:10px 0;">
+                        <strong>${eng.name}</strong> | 📞 ${eng.mobile}<br>
+                        Username: ${eng.username}<br>
+                        <button onclick="editEngineer(${i})">Edit</button>
+                        <button onclick="deleteEngineer(${i})" style="background:#e74c3c;">Delete</button>
+                    </div>`;
         });
         container.innerHTML = html;
     }
@@ -788,139 +527,72 @@
         let mobile = document.getElementById('newEngMobile').value;
         let username = document.getElementById('newEngUsername').value;
         let password = document.getElementById('newEngPassword').value;
-        
-        if (!name || !mobile || !username || !password) {
-            alert("Please fill all fields!");
-            return;
-        }
-        
-        if (users[username]) {
-            alert("Username already exists!");
-            return;
-        }
-        
+        if (!name || !mobile || !username || !password) { alert("Fill all fields!"); return; }
         engineers.push({ name, mobile, username, password });
-        loadEngineersToUsers();
         localStorage.setItem('engineers', JSON.stringify(engineers));
+        loadEngineers();
         renderEngineersList();
-        
-        document.getElementById('newEngName').value = "";
-        document.getElementById('newEngMobile').value = "";
-        document.getElementById('newEngUsername').value = "";
-        document.getElementById('newEngPassword').value = "";
-        
-        alert("✅ Engineer added successfully!");
+        alert("Engineer added!");
     }
     
-    function editEngineer(index) {
-        let eng = engineers[index];
-        let newName = prompt("Enter new name:", eng.name);
-        let newMobile = prompt("Enter new mobile:", eng.mobile);
-        let newPassword = prompt("Enter new password:", eng.password);
-        
+    function editEngineer(i) {
+        let eng = engineers[i];
+        let newName = prompt("New name:", eng.name);
+        let newMobile = prompt("New mobile:", eng.mobile);
+        let newPassword = prompt("New password:", eng.password);
         if (newName) eng.name = newName;
         if (newMobile) eng.mobile = newMobile;
         if (newPassword) eng.password = newPassword;
-        
-        loadEngineersToUsers();
         localStorage.setItem('engineers', JSON.stringify(engineers));
+        loadEngineers();
         renderEngineersList();
-        alert("✅ Engineer updated!");
     }
     
-    function deleteEngineer(index) {
-        if (confirm("Are you sure you want to delete this engineer?")) {
-            engineers.splice(index, 1);
-            loadEngineersToUsers();
+    function deleteEngineer(i) {
+        if (confirm("Delete this engineer?")) {
+            engineers.splice(i, 1);
             localStorage.setItem('engineers', JSON.stringify(engineers));
+            loadEngineers();
             renderEngineersList();
-            alert("✅ Engineer deleted!");
         }
     }
     
-    function openAdminPanel() {
-        document.getElementById('compName').value = companySettings.name;
-        document.getElementById('compAddress').value = companySettings.address;
-        document.getElementById('compMobile').value = companySettings.mobile;
-        document.getElementById('compLogoText').value = companySettings.logoText;
-        document.getElementById('compTagline').value = companySettings.tagline;
-        document.getElementById('primaryColor').value = companySettings.primaryColor;
-        document.getElementById('secondaryColor').value = companySettings.secondaryColor;
-        document.getElementById('headerStyle').value = companySettings.headerStyle;
-        document.getElementById('logoPreviewArea').innerHTML = "";
-        if (companySettings.logoImage) {
-            document.getElementById('logoPreviewArea').innerHTML = `<img src="${companySettings.logoImage}" class="logo-preview" style="max-width:100px;"><br><small>Current Logo</small>`;
-        }
-        renderEngineersList();
-        document.getElementById('adminModal').style.display = "block";
+    function changeAdminPassword() {
+        let old = document.getElementById('oldPassword')?.value;
+        let newPwd = document.getElementById('newPassword')?.value;
+        let confirm = document.getElementById('confirmPassword')?.value;
+        if (old !== adminPassword) { alert("Wrong current password!"); return; }
+        if (newPwd !== confirm) { alert("Passwords don't match!"); return; }
+        if (newPwd.length < 4) { alert("Min 4 characters!"); return; }
+        adminPassword = newPwd;
+        localStorage.setItem('adminPassword', adminPassword);
+        users.admin.password = adminPassword;
+        alert("Password changed!");
     }
     
-    function closeAdminModal() {
-        document.getElementById('adminModal').style.display = "none";
-    }
-
-    function sendEmail(to, subject, body) {
-        let fullBody = `${body}\n\n---\n${companySettings.name}, ${companySettings.address}\n📞 ${companySettings.mobile}`;
-        window.open(`mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(fullBody)}`, '_blank');
-    }
-
-    function sendWhatsApp(phone, message) {
-        let fullMessage = `${message}\n\n- ${companySettings.name}, ${companySettings.address} | ${companySettings.mobile}`;
-        window.open(`https://wa.me/${phone}?text=${encodeURIComponent(fullMessage)}`, '_blank');
-    }
-
+    function closeAdminModal() { document.getElementById('adminModal').style.display = "none"; }
+    
     function getGPSLocation() {
-        let pickupField = document.getElementById('pickupLocation');
-        let errorSpan = document.getElementById('gpsError');
-        
-        errorSpan.innerHTML = "";
-        pickupField.value = "Fetching GPS...";
-        
-        if (!navigator.geolocation) {
-            errorSpan.innerHTML = "GPS not supported. Enter manually.";
-            pickupField.value = "";
-            pickupField.readOnly = false;
-            pickupField.placeholder = "Enter pickup location manually";
-            return;
-        }
-        
-        navigator.geolocation.getCurrentPosition(
-            function(position) {
-                let lat = position.coords.latitude;
-                let lng = position.coords.longitude;
-                document.getElementById('pickupLat').value = lat;
-                document.getElementById('pickupLng').value = lng;
-                
-                fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&zoom=18`)
-                    .then(response => response.json())
-                    .then(data => {
-                        pickupField.value = data.display_name || `${lat}, ${lng}`;
-                        pickupField.readOnly = true;
-                        errorSpan.innerHTML = "✅ GPS captured!";
-                        errorSpan.style.color = "green";
-                    })
-                    .catch(() => {
-                        pickupField.value = `Lat: ${lat}, Lng: ${lng}`;
-                        pickupField.readOnly = true;
-                        errorSpan.innerHTML = "✅ GPS saved";
-                        errorSpan.style.color = "green";
-                    });
-            },
-            function() {
-                errorSpan.innerHTML = "❌ GPS failed. Enter manually.";
-                pickupField.value = "";
-                pickupField.readOnly = false;
-                pickupField.placeholder = "Enter pickup location manually";
-            }
-        );
+        let field = document.getElementById('pickupLocation');
+        if (!navigator.geolocation) { alert("GPS not supported"); return; }
+        navigator.geolocation.getCurrentPosition(pos => {
+            document.getElementById('pickupLat').value = pos.coords.latitude;
+            document.getElementById('pickupLng').value = pos.coords.longitude;
+            fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${pos.coords.latitude}&lon=${pos.coords.longitude}`)
+                .then(r => r.json())
+                .then(data => { field.value = data.display_name || `${pos.coords.latitude}, ${pos.coords.longitude}`; field.readOnly = true; });
+        }, () => alert("GPS failed. Enter manually."));
     }
-
-    function addJob(event) {
-        event.preventDefault();
+    
+    function addJob(e) {
+        e.preventDefault();
         
-        let pickupLocation = document.getElementById('pickupLocation').value;
-        if (!pickupLocation || pickupLocation.trim() === "") {
-            alert("❌ Pickup Location is COMPULSORY!");
+        let pickup = document.getElementById('pickupLocation').value;
+        if (!pickup) { alert("❌ Pickup location required!"); return; }
+        
+        // Check photos - Minimum 2 compulsory
+        if (tempPhotos.length < 2) {
+            alert("❌ Minimum 2 photos required! Please take/add at least 2 photos of the product.");
             return;
         }
         
@@ -928,177 +600,162 @@
             id: generateId(),
             customerName: document.getElementById('custName').value,
             mobile: document.getElementById('custMobile').value,
-            email: document.getElementById('custEmail').value || "N/A",
+            email: document.getElementById('custEmail').value,
             company: document.getElementById('company').value || "N/A",
             productType: document.getElementById('productType').value,
-            pickupLocation: pickupLocation,
+            pickupLocation: pickup,
             pickupLat: document.getElementById('pickupLat').value || "N/A",
             pickupLng: document.getElementById('pickupLng').value || "N/A",
             status: "received",
             statusText: "📦 Product Received",
             cost: 0,
             timestamp: new Date().toLocaleString(),
+            photos: [...tempPhotos], // Save photos with job
             history: [{ status: "received", statusText: "📦 Product Received", date: new Date().toLocaleString(), updatedBy: currentUser?.displayName || "system" }]
         };
         
         jobs.unshift(newJob);
         saveJobs();
         
-        sendEmail(newJob.email, `Job Created - ${newJob.id}`, `Dear ${newJob.customerName},\n\nJob ID: ${newJob.id}\nProduct: ${newJob.productType}\nStatus: Product Received`);
-        sendWhatsApp(newJob.mobile, `🔧 JOB CREATED\n\nJob ID: ${newJob.id}\nProduct: ${newJob.productType}\nStatus: Product Received`);
-        
+        // Clear form and photos
         document.getElementById('jobForm').reset();
+        tempPhotos = [];
+        updatePhotoPreview();
         document.getElementById('pickupLat').value = "";
         document.getElementById('pickupLng').value = "";
         document.getElementById('gpsError').innerHTML = "";
+        
         renderJobList();
-        alert(`✅ Job created! ID: ${newJob.id}`);
+        alert(`✅ Job created! ID: ${newJob.id}\n📸 Photos saved: ${newJob.photos.length}`);
     }
-
-    function updateJobStatus(jobId, newStep, cost) {
-        let jobIndex = jobs.findIndex(j => j.id === jobId);
-        if (jobIndex === -1) return false;
-        
-        let stepText = { received: "📦 Product Received", diagnosis: "🔍 Diagnosis Mode", repairing: "🛠️ Repairing Mode", repaired: "✅ Repaired / Job Done" }[newStep];
-        jobs[jobIndex].status = newStep;
-        jobs[jobIndex].statusText = stepText;
-        if (cost > 0) jobs[jobIndex].cost = cost;
-        
-        if (!jobs[jobIndex].history) jobs[jobIndex].history = [];
-        jobs[jobIndex].history.push({ status: newStep, statusText: stepText, date: new Date().toLocaleString(), updatedBy: currentUser?.displayName || "system", cost: cost > 0 ? cost : null });
-        
+    
+    function updateJobStatus(id, step, cost) {
+        let idx = jobs.findIndex(j => j.id === id);
+        if (idx === -1) return;
+        let stepText = { received: "📦 Product Received", diagnosis: "🔍 Diagnosis Mode", repairing: "🛠️ Repairing Mode", repaired: "✅ Repaired" }[step];
+        jobs[idx].status = step;
+        jobs[idx].statusText = stepText;
+        if (cost > 0) jobs[idx].cost = cost;
+        if (!jobs[idx].history) jobs[idx].history = [];
+        jobs[idx].history.push({ status: step, statusText: stepText, date: new Date().toLocaleString(), updatedBy: currentUser?.displayName || "system", cost: cost > 0 ? cost : null });
         saveJobs();
-        sendWhatsApp(jobs[jobIndex].mobile, `🔧 STATUS UPDATE\n\nJob ID: ${jobId}\nNew Status: ${stepText}${newStep === "repaired" ? `\n💰 Cost: ₹${cost}\n✅ Ready for pickup!` : ""}`);
-        return true;
+        renderJobList();
     }
-
+    
     function deleteJob(id) {
-        if (currentUser?.role !== "admin") return alert("❌ Only Admin can delete!");
-        if (confirm(`Delete ${id}?`)) {
-            jobs = jobs.filter(job => job.id !== id);
-            saveJobs();
-            renderJobList();
-            alert(`✅ Deleted ${id}`);
-        }
+        if (currentUser?.role !== "admin") { alert("Only Admin can delete!"); return; }
+        if (confirm(`Delete ${id}?`)) { jobs = jobs.filter(j => j.id !== id); saveJobs(); renderJobList(); }
     }
-
+    
     function showProfile(job) {
-        let modal = document.getElementById('profileModal');
-        let profileContent = document.getElementById('profileContent');
-        
-        let statusClass = `status-${job.status}`;
         let historyHtml = "<h4>📜 Status History:</h4>";
         if (job.history && job.history.length > 0) {
-            job.history.forEach(h => { historyHtml += `<div class="profile-detail" style="font-size:12px;"><strong>${h.date}</strong> → ${h.statusText} ${h.cost ? `(₹${h.cost})` : ""}<br><small>by: ${h.updatedBy}</small></div>`; });
+            job.history.forEach(h => { historyHtml += `<div class="profile-detail"><strong>${h.date}</strong> → ${h.statusText} ${h.cost ? `(₹${h.cost})` : ""}<br><small>by: ${h.updatedBy}</small></div>`; });
         } else {
             historyHtml += "<div class='profile-detail'>No history yet.</div>";
         }
         
-        let updateSection = (currentUser?.role === "admin" || currentUser?.role === "engineer") ? `
+        let photosHtml = "";
+        if (job.photos && job.photos.length > 0) {
+            photosHtml = "<h4>📸 Product Photos:</h4><div class='photo-gallery'>";
+            job.photos.forEach(photo => {
+                photosHtml += `<img src="${photo}" onclick="viewFullImage('${photo}')">`;
+            });
+            photosHtml += "</div>";
+        }
+        
+        let updateHtml = (currentUser?.role === "admin" || currentUser?.role === "engineer") ? `
             <div class="update-status-section">
-                <h4>⚙️ Update Job Status</h4>
-                <select id="modalUpdateStep">
-                    <option value="received" ${job.status === "received" ? "selected" : ""}>📦 Product Received</option>
-                    <option value="diagnosis" ${job.status === "diagnosis" ? "selected" : ""}>🔍 Diagnosis Mode</option>
-                    <option value="repairing" ${job.status === "repairing" ? "selected" : ""}>🛠️ Repairing Mode</option>
-                    <option value="repaired" ${job.status === "repaired" ? "selected" : ""}>✅ Repaired / Job Done</option>
+                <select id="updateStep">
+                    <option value="received">📦 Product Received</option>
+                    <option value="diagnosis">🔍 Diagnosis Mode</option>
+                    <option value="repairing">🛠️ Repairing Mode</option>
+                    <option value="repaired">✅ Repaired</option>
                 </select>
-                <input type="number" id="modalRepairCost" placeholder="Repair Cost (₹)" value="${job.cost || ""}">
-                <button onclick="updateFromProfile('${job.id}')">🔄 Update Status</button>
+                <input type="number" id="updateCost" placeholder="Repair Cost">
+                <button onclick="updateFromProfile('${job.id}')">Update Status</button>
             </div>
         ` : "";
         
-        profileContent.innerHTML = `
-            <div class="profile-header"><h2>👤 Customer Profile</h2><h3>Job ID: ${job.id}</h3></div>
+        let html = `
+            <div class="profile-header"><h2>Customer Profile</h2><h3>ID: ${job.id}</h3></div>
             <div class="profile-detail"><strong>Customer:</strong> ${job.customerName}</div>
             <div class="profile-detail"><strong>Mobile:</strong> ${job.mobile}</div>
             <div class="profile-detail"><strong>Email:</strong> ${job.email}</div>
             <div class="profile-detail"><strong>Product:</strong> ${job.productType}</div>
             <div class="profile-detail"><strong>📍 Pickup:</strong> ${job.pickupLocation}</div>
-            <div class="profile-detail"><strong>Status:</strong> <span class="status ${statusClass}">${job.statusText}</span></div>
-            ${job.cost > 0 ? `<div class="profile-detail"><strong>💰 Cost:</strong> ₹ ${job.cost}</div>` : ""}
-            <div class="profile-detail"><strong>Created:</strong> ${job.timestamp}</div>
+            <div class="profile-detail"><strong>Status:</strong> <span class="status status-${job.status}">${job.statusText}</span></div>
+            ${job.cost > 0 ? `<div class="profile-detail"><strong>💰 Cost:</strong> ₹${job.cost}</div>` : ""}
+            ${photosHtml}
             ${historyHtml}
-            ${updateSection}
-            <div style="margin-top:15px;">
-                <button class="whatsapp-btn" onclick="sendWhatsApp('${job.mobile}', 'JOB STATUS\\nID: ${job.id}\\nStatus: ${job.statusText}')">📱 WhatsApp</button>
-                <button class="email-btn" onclick="sendEmail('${job.email}', 'Job Update', 'Status: ${job.statusText}')">📧 Email</button>
-                ${job.status === "repaired" ? `<button style="background:#2ecc71;margin-top:10px;" onclick="printBillFromProfile('${job.id}')">🖨️ Print Bill</button>` : ""}
-                ${currentUser?.role === "admin" ? `<button class="delete-btn" onclick="deleteJobFromProfile('${job.id}')">🗑️ Delete Job</button>` : ""}
-            </div>
+            ${updateHtml}
+            ${job.status === "repaired" ? `<button style="background:#2ecc71;" onclick="printBill('${job.id}')">🖨️ Print Bill</button>` : ""}
+            ${currentUser?.role === "admin" ? `<button class="delete-btn" onclick="deleteJobFromProfile('${job.id}')" style="background:#e74c3c;">🗑️ Delete Job</button>` : ""}
         `;
-        modal.style.display = "block";
+        document.getElementById('profileContent').innerHTML = html;
+        document.getElementById('profileModal').style.display = "block";
     }
     
-    function updateFromProfile(jobId) {
-        let newStep = document.getElementById('modalUpdateStep').value;
-        let cost = parseInt(document.getElementById('modalRepairCost').value) || 0;
-        if (newStep === "repaired" && cost === 0) return alert("⚠️ Add repair cost!");
-        updateJobStatus(jobId, newStep, cost);
+    function viewFullImage(src) {
+        let win = window.open('', '_blank');
+        win.document.write(`<html><body style="display:flex; justify-content:center; align-items:center; height:100vh;"><img src="${src}" style="max-width:95%; max-height:95%;"></body></html>`);
+        win.document.close();
+    }
+    
+    function updateFromProfile(id) {
+        let step = document.getElementById('updateStep').value;
+        let cost = parseInt(document.getElementById('updateCost').value) || 0;
+        if (step === "repaired" && cost === 0) { alert("Add repair cost!"); return; }
+        updateJobStatus(id, step, cost);
         closeProfile();
-        renderJobList();
-        alert(`✅ Job ${jobId} updated!`);
     }
     
-    function deleteJobFromProfile(jobId) { closeProfile(); deleteJob(jobId); }
+    function deleteJobFromProfile(id) { closeProfile(); deleteJob(id); }
     
-    function printBillFromProfile(jobId) {
-        let job = jobs.find(j => j.id === jobId);
-        if (!job || job.status !== "repaired") return alert("⚠️ Bill only when Repaired");
+    function printBill(id) {
+        let job = jobs.find(j => j.id === id);
+        if (!job || job.status !== "repaired") { alert("Bill only when Repaired!"); return; }
         let gst = Math.round(job.cost * 0.18), total = job.cost + gst;
-        let billHTML = `<!DOCTYPE html><html><head><title>Invoice ${job.id}</title></head><body style="font-family:Arial;padding:20px;"><div style="max-width:450px;margin:auto;padding:20px;border:2px solid ${companySettings.primaryColor};border-radius:12px;"><div style="text-align:center;border-bottom:2px solid ${companySettings.primaryColor};padding-bottom:10px;">${companySettings.logoImage ? `<img src="${companySettings.logoImage}" style="max-width:60px;"><br>` : ""}<h1 style="color:${companySettings.primaryColor};">${companySettings.logoText}</h1><h3>${companySettings.tagline}</h3><p>📍 ${companySettings.address}</p><p>📞 ${companySettings.mobile}</p></div><hr><p><strong>Bill No:</strong> ${job.id}</p><p><strong>Date:</strong> ${new Date().toLocaleString()}</p><p><strong>Customer:</strong> ${job.customerName}</p><p><strong>Product:</strong> ${job.productType}</p><p><strong>Pickup:</strong> ${job.pickupLocation}</p><hr><p><strong>Repair Cost:</strong> ₹ ${job.cost}</p><p><strong>GST (18%):</strong> ₹ ${gst}</p><p><strong style="font-size:18px;">Total: ₹ ${total}</strong></p><hr><p style="text-align:center;">🚀 Thank you! 🚀</p></div><script>window.print();<\/script></body></html>`;
-        let printWindow = window.open('', '_blank');
-        printWindow.document.write(billHTML);
-        printWindow.document.close();
+        let win = window.open('', '_blank');
+        win.document.write(`<html><body><div style="padding:20px;"><h2>SHIVANSH IT SERVICES</h2><p>RANE NAGAR, NASHIK | 7775057299</p><hr><p>Bill No: ${job.id}<br>Date: ${new Date().toLocaleString()}<br>Customer: ${job.customerName}<br>Product: ${job.productType}<br>Repair Cost: ₹${job.cost}<br>GST 18%: ₹${gst}<br><strong>Total: ₹${total}</strong></p><hr><p>Thank you!</p></div><script>window.print();<\/script></body></html>`);
+        win.document.close();
     }
     
-    function closeProfile() { document.getElementById('profileModal').style.display = "none"; }
-
     function renderJobList() {
         let container = document.getElementById('jobList');
-        if (jobs.length === 0) return container.innerHTML = "<p>No jobs found.</p>";
+        if (jobs.length === 0) { container.innerHTML = "<p>No jobs.</p>"; return; }
         let html = "";
         jobs.forEach(job => {
             html += `<div class="job-card" onclick='showProfile(${JSON.stringify(job)})'>
-                        <strong>ID:</strong> ${job.id} | <strong>${job.customerName}</strong><br>
-                        <strong>Product:</strong> ${job.productType}<br>
-                        <strong>Status:</strong> <span class="status status-${job.status}">${job.statusText}</span>
-                        ${job.cost > 0 ? `<br><strong>💰 ₹ ${job.cost}</strong>` : ""}
-                        <br><small>👆 Click for profile</small>
+                        <strong>${job.id}</strong> | ${job.customerName}<br>
+                        ${job.productType}<br>
+                        <span class="status status-${job.status}">${job.statusText}</span>
+                        ${job.photos ? `<br><small>📸 ${job.photos.length} photos</small>` : ""}
                     </div>`;
         });
         container.innerHTML = html;
     }
-
+    
     function searchJob() {
         let job = jobs.find(j => j.id === document.getElementById('searchId').value);
-        if (!job) return document.getElementById('searchResult').innerHTML = "<p style='color:red'>❌ ID not found.</p>";
+        if (!job) { document.getElementById('searchResult').innerHTML = "<p style='color:red'>ID not found</p>"; return; }
         showProfile(job);
         document.getElementById('searchResult').innerHTML = "";
-        document.getElementById('searchId').value = "";
     }
-
+    
     function login() {
-        let username = document.getElementById('loginUsername').value;
-        let password = document.getElementById('loginPassword').value;
-        if (users[username] && users[username].password === password) {
-            currentUser = { 
-                username: username, 
-                role: users[username].role, 
-                displayName: users[username].displayName 
-            };
+        let u = document.getElementById('loginUsername').value;
+        let p = document.getElementById('loginPassword').value;
+        if (users[u] && users[u].password === p) {
+            currentUser = { username: u, role: users[u].role, displayName: users[u].displayName };
             localStorage.setItem('currentUser', JSON.stringify(currentUser));
             document.getElementById('loginContainer').style.display = 'none';
             document.getElementById('mainApp').style.display = 'block';
-            let displayText = currentUser.role === "admin" ? "Admin" : currentUser.displayName;
-            document.getElementById('userRoleDisplay').innerHTML = `${displayText} (${currentUser.role})`;
+            document.getElementById('userRoleDisplay').innerHTML = `${currentUser.displayName} (${currentUser.role})`;
             if (currentUser.role === "admin") document.getElementById('adminPanelBtn').style.display = "inline-block";
-            applyCompanySettings();
             renderJobList();
             updateDashboard();
-        } else {
-            document.getElementById('loginError').innerHTML = "❌ Invalid credentials!";
-        }
+        } else { document.getElementById('loginError').innerHTML = "Invalid credentials!"; }
     }
     
     function logout() {
@@ -1106,33 +763,24 @@
         localStorage.removeItem('currentUser');
         document.getElementById('loginContainer').style.display = 'block';
         document.getElementById('mainApp').style.display = 'none';
-        document.getElementById('loginUsername').value = "";
-        document.getElementById('loginPassword').value = "";
-        document.getElementById('loginError').innerHTML = "";
     }
     
-    let savedUser = localStorage.getItem('currentUser');
-    if (savedUser) {
-        currentUser = JSON.parse(savedUser);
+    function closeProfile() { document.getElementById('profileModal').style.display = "none"; }
+    
+    let saved = localStorage.getItem('currentUser');
+    if (saved) {
+        currentUser = JSON.parse(saved);
         document.getElementById('loginContainer').style.display = 'none';
         document.getElementById('mainApp').style.display = 'block';
-        let displayText = currentUser.role === "admin" ? "Admin" : currentUser.displayName;
-        document.getElementById('userRoleDisplay').innerHTML = `${displayText} (${currentUser.role})`;
+        document.getElementById('userRoleDisplay').innerHTML = `${currentUser.displayName} (${currentUser.role})`;
         if (currentUser.role === "admin") document.getElementById('adminPanelBtn').style.display = "inline-block";
-        applyCompanySettings();
         renderJobList();
         updateDashboard();
     }
     
-    document.getElementById('jobForm').addEventListener('submit', addJob);
-    document.getElementById('searchBtn').addEventListener('click', searchJob);
-    document.getElementById('getGpsBtn').addEventListener('click', getGPSLocation);
-    window.onclick = function(e) { 
-        if (e.target === document.getElementById('profileModal')) closeProfile(); 
-        if (e.target === document.getElementById('adminModal')) closeAdminModal();
-        if (e.target === document.getElementById('jobsListModal')) closeJobsListModal();
-    };
-    applyCompanySettings();
+    document.getElementById('jobForm')?.addEventListener('submit', addJob);
+    document.getElementById('searchBtn')?.addEventListener('click', searchJob);
+    document.getElementById('getGpsBtn')?.addEventListener('click', getGPSLocation);
 </script>
 </body>
 </html>
